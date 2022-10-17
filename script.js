@@ -1,6 +1,7 @@
 $(document).ready(function () {
     // listen for save button clicks
 
+    // display current day on page
    var currentDay = moment().format('dddd, MMMM Do, YYYY');
     var cD = document.getElementById ('currentDay');
 
@@ -39,7 +40,7 @@ $(document).ready(function () {
     });
 
     function hourUpdater() {
-        // get current number of hours (preferably with moment.js)
+        // get current number of hours 
       
         var currTime = moment().format('HH');     
         
@@ -49,19 +50,21 @@ $(document).ready(function () {
         console.log(currTime);
         console.log (taskHour);
 
-        if (currTime == taskHour) {
-            $("textarea").addClass ('present');
-            console.log('present')
+        if (taskHour < currTime) {
+            $(this).addClass ('past');
+            console.log('past');
         }
       
-       else if (currTime > taskHour) {
-        $("textarea").addClass ('future');
+
+       else if (currTime < taskHour) {
+        $(this).addClass ('future');
         console.log('future')
        }
 
        else  {
-        $("textarea").addClass ('past');
-        console.log('past')
+
+        $(this).addClass ('present');
+        console.log('present')
         }
 
         });
@@ -70,10 +73,7 @@ $(document).ready(function () {
     }
 
        
-        // loop over time blocks ---> https://api.jquery.com/each/
-        // inside this loop, // check if we've moved past this time. If we have, make the row grey. If it's future, make it green. if it's past, make it red. Using the past, present, and future classes in css file
-
-        // check if we've moved past this time
+      
   
 
     hourUpdater();
@@ -82,7 +82,7 @@ $(document).ready(function () {
     var interval = setInterval(hourUpdater, 15000);
 
     // load any saved data from localStorage
-    $('#9 .description').val(localStorage.getItem('9'));
+    $('#09 .description').val(localStorage.getItem('09'));
     $('#10 .description').val(localStorage.getItem('10'));
     $('#11 .description').val(localStorage.getItem('11'));
     $('#12 .description').val(localStorage.getItem('12'));
@@ -97,5 +97,4 @@ $(document).ready(function () {
   
        
 
-    // display current day on page
 })
